@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<meta name="description" content="POS - Bootstrap Admin Template">
+	<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, invoice, html5, responsive, Projects">
+	<meta name="author" content="Dreamguys - Bootstrap Admin Template">
+	<meta name="robots" content="noindex, nofollow">
+	<title>Dreams Pos admin template</title>
+
+	<!-- jQuery -->
+	<script src="~/assets/js/jquery-3.6.0.min.js"></script>
+
+	<partial name="/Views/Shared/DashobardPartials/_PartialCss.cshtml" />
+</head>
+
+<body>
+	<div id="global-loader">
+		<div class="whirly-loader"> </div>
+	</div>
+
+	<!-- Main Wrapper -->
+	<div class="main-wrapper">
+
+		<partial name="/Views/Shared/DashobardPartials/_PartialHeader.cshtml" />
+		<partial name="/Views/Shared/DashobardPartials/_PartialSideBar.cshtml" />
+
+		@RenderBody()
+	</div>
+	<!-- Main Wrapper -->
+
+	<partial name="/Views/Shared/DashobardPartials/_PartialJavaScript.cshtml" />
+
+	<script type="text/javascript">
+
+		function LoadSideBarMenus() {
+
+			var opt = {
+				url: "/Home/GetDataForHomePage",
+				event: function (rsp) {
+					if (rsp.ResultStatus == 0) {
+						$("#sidebar").html(rsp.Data.MenuItems)
+						$.getScript('../../assets/js/sidebar.js', function () { });
+					}
+					else {
+						toastr.error(rsp.ErrorMessage, 'Uyarı', {
+							positionClass: 'toast-bottom-left'
+						});
+					}
+				}
+			}
+
+			SendRequest(opt);
+		}
+
+		LoadSideBarMenus();
+
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+﻿*.vsidx
+.vs/
+obj/
+bin/
+App_Data/Logs/
+Logs/
+launchSettings.json
+*.nupkg
